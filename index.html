@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>엄지민 - 공간데이터사이언티스트</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box;
+            font-family: 'Pretendard', -apple-system, sans-serif; 
+        }
+        
+        body {
+            background: #f9fafb;
+            color: #111827;
+            line-height: 1.6;
+        }
+        
+        body.dark {
+            background: #0f172a;
+            color: #f3f4f6;
+        }
+        
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            z-index: 50;
+        }
+        
+        body.dark header {
+            background: #1e293b;
+            border-bottom-color: #374151;
+        }
+        
+        header .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        header h1 { font-size: 1.25rem; font-weight: bold; }
+        header p { font-size: 0.75rem; color: #6b7280; }
+        
+        body.dark header p { color: #9ca3af; }
+        
+        .theme-btn {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 5rem 1.5rem;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero .highlight {
+            color: #4f46e5;
+        }
+        
+        .hero p {
+            font-size: 1.125rem;
+            color: #374151;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+        
+        body.dark .hero p { color: #d1d5db; }
+        
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 0.75rem;
+            background: #e0e7ff;
+            color: #4338ca;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        body.dark .badge {
+            background: #312e81;
+            color: #a5b4fc;
+        }
+        
+        /* Section */
+        section {
+            padding: 5rem 1.5rem;
+            max-width: 1440px;
+            margin: 0 auto;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        body.dark section { border-top-color: #374151; }
+        
+        section h2 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin-bottom: 3rem;
+        }
+        
+        /* Grid */
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+        
+        @media (min-width: 768px) {
+            .grid-2 { grid-template-columns: repeat(2, 1fr); }
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        }
+        
+        /* Cards */
+        .card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+        }
+        
+        body.dark .card {
+            background: #1e293b;
+            border-color: #374151;
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #e0e7ff, #dbeafe);
+        }
+        
+        body.dark .card-image {
+            background: linear-gradient(135deg, #312e81, #1e3a8a);
+        }
+        
+        .card-body {
+            padding: 1.25rem;
+        }
+        
+        .card-tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: #dbeafe;
+            color: #1e40af;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        body.dark .card-tag {
+            background: #1e3a8a;
+            color: #93c5fd;
+        }
+        
+        .card-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin: 0.75rem 0;
+        }
+        
+        .card-desc {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+        
+        body.dark .card-desc { color: #9ca3af; }
+        
+        .card-link {
+            font-size: 0.875rem;
+            color: #4f46e5;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+        
+        body.dark .card-link { color: #818cf8; }
+        
+        /* Modal */
+        .modal { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.5); 
+            z-index: 1000; 
+            align-items: center; 
+            justify-content: center;
+        }
+        
+        .modal.show { display: flex; }
+        
+        .modal-box { 
+            background: white; 
+            padding: 2rem; 
+            border-radius: 0.75rem; 
+            max-width: 600px; 
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        body.dark .modal-box { 
+            background: #1e293b; 
+            color: #e5e7eb; 
+        }
+        
+        .close-btn { 
+            position: absolute; 
+            top: 1rem; 
+            right: 1rem; 
+            background: none; 
+            border: none; 
+            font-size: 1.5rem; 
+            cursor: pointer; 
+            color: #6b7280;
+        }
+        
+        body.dark .close-btn { color: #9ca3af; }
+        
+        .modal-box h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-box h3 {
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-box p, .modal-box li {
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-box ul {
+            margin-left: 1.25rem;
+            list-style: disc;
+        }
+        
+        /* Two Column */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        
+        @media (min-width: 768px) {
+            .two-col { grid-template-columns: 1fr 1fr; }
+        }
+        
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .skill-item p:first-child {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .skill-item p:last-child {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        body.dark .skill-item p:last-child { color: #9ca3af; }
+        
+        .award-box {
+            padding: 1rem;
+            background: #eef2ff;
+            border-left: 4px solid #4f46e5;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        body.dark .award-box {
+            background: #312e81;
+            border-left-color: #818cf8;
+        }
+        
+        .award-box p:first-child {
+            font-weight: 600;
+        }
+        
+        .award-box p:last-child {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+        
+        body.dark .award-box p:last-child { color: #9ca3af; }
+        
+        /* Contact */
+        .contact-center {
+            text-align: center;
+        }
+        
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background: white;
+            color: #111827;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-btn:hover {
+            background: #f3f4f6;
+        }
+        
+        body.dark .contact-btn {
+            border-color: #374151;
+            background: #1e293b;
+            color: #f3f4f6;
+        }
+        
+        body.dark .contact-btn:hover {
+            background: #334155;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid #e5e7eb;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+        
+        body.dark footer {
+            border-top-color: #374151;
+            color: #9ca3af;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div>
+                <h1>엄지민</h1>
+                <p>공간데이터사이언티스트</p>
+            </div>
+            <button class="theme-btn" onclick="toggleDark()">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+        <h2>공간데이터사이언티스트를<br>꿈꾸는 <span class="highlight">엄지민</span>입니다</h2>
+        <p>위성영상과 공간데이터에서 의미있는 인사이트를 도출하고, 이를 실제 사회 문제 해결로 연결하는 지리학자입니다.</p>
+        <div class="badges">
+            <span class="badge">ArcGIS</span>
+            <span class="badge">QGIS</span>
+            <span class="badge">Python</span>
+            <span class="badge">머신러닝</span>
+            <span class="badge">공간분석</span>
+        </div>
+    </div>
+
+    <!-- Projects -->
+    <section>
+        <h2>프로젝트</h2>
+        <div class="grid grid-3">
+            
+            <!-- Project 1: Sahel -->
+            <div class="card" onclick="openProject('sahel')">
+                <img src="project-sahel.png" onerror="this.src=sahel_b64" style="width: 100%; height: 160px; object-fit: cover; display: block;">
+                <div class="card-body">
+                    <span class="card-tag">공간분석</span>
+                    <h3 class="card-title">아프리카 사헬 지대 비포장도로 추출</h3>
+                    <p class="card-desc">위성영상 기반 도로 자동 추출</p>
+                    <p class="card-link">→ 클릭해서 보기</p>
+                </div>
+            </div>
+
+            <!-- Project 2: Geosensibility Contour -->
+            <div class="card" onclick="openProject('geo-emotion')">
+                <img src="project-geo-emotion.png" onerror="this.src=geo_emotion_b64" style="width: 100%; height: 160px; object-fit: cover; display: block;">
+                <div class="card-body">
+                    <span class="card-tag" style="background: #fce7f3; color: #be185d;">시각화</span>
+                    <h3 class="card-title">감성의 등고선</h3>
+                    <p class="card-desc">도시 감성 공간지리 프로젝트</p>
+                    <p class="card-link">→ 클릭해서 보기</p>
+                </div>
+            </div>
+
+            <!-- Project 3: Wildfire -->
+            <div class="card" onclick="openProject('wildfire')">
+                <img src="project-wildfire.png" onerror="this.src=wildfire_b64" style="width: 100%; height: 160px; object-fit: cover; display: block;">
+                <div class="card-body">
+                    <span class="card-tag">머신러닝</span>
+                    <h3 class="card-title">전력 인프라 산불 위험도 분석</h3>
+                    <p class="card-desc">기상청 공모전 프로젝트</p>
+                    <p class="card-link">→ 클릭해서 보기</p>
+                </div>
+            </div>
+
+            <!-- Project 4: Heat Wave -->
+            <div class="card" onclick="openProject('heat-wave')">
+                <img src="project-heat-wave.png" onerror="this.src=heat_wave_b64" style="width: 100%; height: 160px; object-fit: cover; display: block;">
+                <div class="card-body">
+                    <span class="card-tag">공간머신러닝</span>
+                    <h3 class="card-title">폭염 회피 경로 최적화 (COMPAS)</h3>
+                    <p class="card-desc">보행 열스트레스 분석 & PyGRF 모델링</p>
+                    <p class="card-link">→ 클릭해서 보기</p>
+                </div>
+            </div>
+
+            <!-- Project 5: World Bank -->
+            <div class="card" onclick="openProject('world-bank')">
+                <img src="project-world-bank.png" onerror="this.src=world_bank_b64" style="width: 100%; height: 160px; object-fit: cover; display: block;">
+                <div class="card-body">
+                    <span class="card-tag">머신러닝</span>
+                    <h3 class="card-title">월드뱅크 빈곤율 예측</h3>
+                    <p class="card-desc">LightGBM 모델</p>
+                    <p class="card-link">→ 클릭해서 보기</p>
+                </div>
+            </div>
+
+            <!-- Project 6: SDGs -->
+            <div class="card" onclick="openProject('sdgs')">
+                <img src="project-sdgs.png" onerror="this.src=sdgs_b64" style="width: 100%; height: 160px; object-fit: cover; display: block;">
+                <div class="card-body">
+                    <span class="card-tag" style="background: #d1fae5; color: #059669;">리더십</span>
+                    <h3 class="card-title">Global SDGs Youth Camp</h3>
+                    <p class="card-desc">UN 청년 특별보고관</p>
+                    <p class="card-link">→ 클릭해서 보기</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Skills & Awards -->
+    <section>
+        <div class="two-col">
+            <div>
+                <h2>🔧 기술 스택</h2>
+                <div class="skill-item">
+                    <p>공간데이터 분석</p>
+                    <p>ArcGIS, QGIS 기반 공간데이터 분석 및 시각화</p>
+                </div>
+                <div class="skill-item">
+                    <p>위성영상 처리</p>
+                    <p>위성 이미지 처리 및 공간 매핑</p>
+                </div>
+                <div class="skill-item">
+                    <p>머신러닝</p>
+                    <p>Python 기반 머신러닝 모델 개발</p>
+                </div>
+                <div class="skill-item">
+                    <p>딥러닝</p>
+                    <p>U-Net, ResNet 등 CNN 모델 구축 및 세그멘테이션</p>
+                </div>
+                <div class="skill-item">
+                    <p>데이터 & 사무</p>
+                    <p>Python, SQL, Excel</p>
+                </div>
+            </div>
+            
+            <div>
+                <h2>🏆 수상 경력</h2>
+                <div class="award-box">
+                    <p>공간 빅데이터 분석 및 시각화 경진대회</p>
+                    <p>최우수상 · 2025.12.17 · 이화여자대학교</p>
+                </div>
+                <div class="award-box">
+                    <p>AI 활용 지리학 콘텐츠 공모전</p>
+                    <p>우수상 · 2026.6.19 · 대한지리학회</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-center">
+        <h2>연락처</h2>
+        <div class="contact-links">
+            <a href="mailto:jiminum0921@gmail.com" class="contact-btn">
+                <i class="fas fa-envelope"></i> Email
+            </a>
+            <a href="https://github.com/jiminum0921" target="_blank" class="contact-btn">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 엄지민. 공간데이터사이언티스트 포트폴리오.</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-box">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    
+
+
+<script>
+  const sahel_b64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAADICAIAAADdvUsCAAADNklEQVR4nO3csWoUURiA0dk1CSQkYIoU2gW0UcHSF8tj+Bq+i9bG0k4IqJDoBgWTEIvUETYLfjO751R7i4Ep7sfcmYV/dvruZAA68/oGYNOJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQohtrXLxyzdvV7n804eTVS6H9eBJCDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQW2nGzDiZfMO0rBSh/QqrcxyFmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCG2hjNmxsnkG+6zhhHar0yL4yjERAgxEUJMhBATIcTW8OvoWrr7h2Nx/uz2dj6b3Rwcfl5q6YvxmIlwGn5fPhmGYXFxfP719eHRx63tX8suGS0RTsPVn4NhGG5vH+3un11d7T9gyWh5J5ySH99fHD19f3lx/IAloyXCKXl8dHrx7dXdK9+yS0ZLhNOwvbPY3lnM59c/z5/f/V5qWd8+/+KdcBp298+GYbi+2ts7+DKb3TxgyWiJcBr8x7DGHEchJkKIiRBiIoSYCCHm6+hGM/lmDET4n9iv3MdxFGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmPEWjM6mTb4R4Uab3H5dS46jEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxM2YYnU2bfONJCDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcT+Alxmw++IYNIXAAAAAElFTkSuQmCC';
+  const geo_emotion_b64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAADICAIAAADdvUsCAAAFfElEQVR4nO3bu3IcRRiG4V7ZAdgOjSFwQeKCiOKKnPmuRCRuisJAAaacQIhVJEgEcq3Xq9XuaPbw9cz/PNlWeayZ7n7nsIfFxflVA3LO0jsA1YkQwkQIYSKEMBFCmAghTIQQJkIIEyGEiRDCRAhhIoQwEUKYCCFMhBAmQggTIYSJEMJECGEihDARQpgIIUyEECZCCBMhhIkQwkQIYSKEMBFCmAghTIQQJkIIEyGEiRDCRAhhIoQwEUKYCCFMhBAmQggTIYSJEMJECGEihDARQpgIIUyEECZCCBMhhD1M7wC7vXy12GfzH76/PtSecAwi7Miesd33vxVnJ0SYdKTqxv11TaaI8NRGhLdnHgP/4uo/E+QpLS7Or9L7MH8DMzjx0u9zrwoS4RHtXOVdre9p7e2ciPAotizoSSzlqe//tIjwkOa3dud3RB0S4WHM/mOA2R9gkAj3tXF1znhpVjveExDheLeXY6m1WPzwD0iEY1h/S4ZifyK8H2tuI8OyDxEOZZ3tZIjGEeEgvmY5nLG6LxHuYEmNY9yG86Pebayk0dbGKvt7kc65Et7JrwoOwjDuJMINXAAPy3huJ8J1ztxHYmDv4pnwIxbK8ayOp0fEVSL8QIHHpsONRPieAk9Dh7eJsDUFnpYO14hQgQE6XFU9QgWm6HCpdIQKzNLhjboRKrAHOmyVI1xSYJbxLxrh8qRrBfRgOQs1L4YVI6w501NRcHYqRrjkMtiPynNRLkI3ot0qe1NaK8JqsztdpWaqVoRLLoN9qjkvhSIsdXKdgTrzVSjCpZqn26koODsVI4SuVInQm6ITUu1t0ioRQrdECGElInQvOjml7khLRAg9EyGEiRDC5h+hB8KJqvNYOP8IoXMP0zvAupevFm9+b9dX7eysPf+qtda2vLy5XIzYhH6IsDt//9Xevrn+6cf24pv2yaeLttj6cuwm9EOE3bn8p/131Z4+a5fv2uW71tqOl+M2oR+eCXv068/t2+8Wb/8c9HL0JnRChD168XX75fX18y8HvRy9CZ0QYXcePWkPHrQ/fmuPn7RHj3e8HL0J/fBM2J2nn7V/Lxeff9HOztrTZ621HS/HbUI/RNidER8h+NRh0tyOQtj8I6zz7aeZqfN9w/lHCJ0TIYSJEMJKROixcHLqPBC2IhFCz0QIYVUidEc6IaXuRVudCKFbFSN0MexZwdkpFGGRe5vZqDNfhSJcVfB0Owk156VWhHVOrlNXaqZqRdi8Tdqxam+KLpWLcJUO+1F5LipGWO1EOy0FZ6dihM1NaWfK3ojeKBrhKh1mGf+6Ea6edK2DlNWRr3kZbJUjbDpMU+CN0hE2HeYocKl6hE2HCQpcJcLWdHhaClwjwvd0eBoKvE2EH+jw2BS4kQg/osPjUeBdFhfnV+l96M5aflbMnozndiK8kzP3QRjGnUS4jVP4PozeQJ4Jt1lbN54Sh1PgcK6Eg1hSwxmr+xLhULcvg5bXGkM0jgjvxzrbyLDsQ4RjWHNLhmJ/Ihyv+PorfvgHJMJ9bXzLdMbLsdrxnoAID+OuTy9mszpnf4BBIjykLR8kTnSxzu+IOiTCo5j62p36/k+LCI9o5zdsulrQ09rbORHhKQz8vtuJV3mfe1WQCE9txBdQ98zg9H+RexFhUlffCBdeysP0DpSW/ZWG6johwo7cVcWecYqtcyKcABXNmx/1QpgIIUyEECZCCBMhhIkQwkQIYSKEMBFCmAghTIQQJkIIEyGEiRDCRAhhIoQwEUKYCCFMhBAmQggTIYSJEMJECGEihDARQpgIIUyEECZCCBMhhIkQwkQIYSKEMBFCmAghTIQQJkIIEyGEiRDCRAhhIoQwEUKYCCFMhBAmQggTIYSJEMJECGEihLD/ATKhn/MSHdFpAAAAAElFTkSuQmCC';
+  const wildfire_b64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAADICAIAAADdvUsCAAAE10lEQVR4nO3dv4scdRjH8ScXr7CQaAobCcgRW+0kELC20dZaLPI3+Keks7AXK61tFBsRtJNDkICVSUohEotwcHf7I5Pb2fk8e9/XqxtuZvdp3nx3vrPs3Xj+2UkBOUfpAWB0IoQwEUKYCCFMhBAmQggTIYSJEMJECGEihDARQpgIIUyEECZCCBMhhIkQwkQIYSKEMBFCmAghTIQQJkIIEyGEiRDCRAhhIoQwEUKYCCFMhBAmQggTIYSJEMJECGEihDARQpgIIUyEECZCCBMhhL2WHuDQ/PHWxj/dfbzgHFwfIpxgS3ibThMkk4lwq4n5bbpQikwgwg2unN/qi0iRrUS4Ypb8Vl9Qimxgd/Si2Qtc4JU5cCI8Z9+d6JB1RHhmmUJ0yAoRVtWybeiQi0SYqEKHnDN8hKkedMiZsSPMlqBDqmr0CKGBgSPssBB1mIG0gSOEHkaNsM8S1GcSQkaNENoYMsJui0+3eVjWkBFCJyKEMBFC2HgR9rwB6zkVixgvQmhGhBAmQggTIYSJEMJECGEihDARQth4Efb8JeyeU7GI8SKEZkQIYSKEsCEj7HYD1m0eljVkhNDJqBH2WXz6TELIqBFCGwNH2GEJ6jADaQNHCD2M/T/r7z5O/q7EjMvgrdONf3p6Mtu7sB9jR1i5DncvcEt4m04TZEs+jiZuzHZ8x1unUwuc60L2SYRVtWyHu7zXLBVJsRkRnlmmwyu/y+zlSLENEZ6z7w53KXBPdNiACC/aX4cNC1zm9XmZ4XdHV72oZcYt0x1vAhdw69TGaZAIN5glxd13QRejwxwRbnXlFBd7DDgjHYaIcILzRW0JcplvwOyVDhNE+IoWeJKR3SnR4eLsjkKYCJvp8MCgwwwjESGEibCTPktQn0kGIEIIszvaxqXF5+Hz+vXb+u9Z3TyuDz6tqguHD268/Jy1l7zSPLZJFyHCrv78uX77rn54WPe/qDferqOjC4dTzll7Cf2IsKt//qpn/9bJvXryqJ48qqrLh1POWb2EftwTNvbT1/Xxl/X79+sPp5yz9hKaEWEPa3cj739eP35V73+y/nDKOWsv2XEq5ibCrm7fqePX65dv6vadevOdy4dTzll7Cf24J+zq3Q/r6d/13kd187hO7lXV5cMp56xeQj8i7GrKE4VXfepASz6OQpgIIUyEECZCCBMhhImwh55fle451bUjQggTIYSJEMJE2Ea3G7Bu81xfIoQwEXbSZ/HpM8kARAhhImymwxLUYYaRiBDCRNhPdiGyDC5OhC2lSlBgggi7Wr4HBYaIsLElq1Bgjgh7W6YNBUaJsL19F6LANBEegv11osAG/OThgXhRy4w/iS2/NkR4UGZJUX7NiPAAXTlF+bUkwoN1vqgtQQqvPRFeC0o7ZHZHIUyEECZCCBMhhIkQwkQIYSKEMBFCmAghTIQQJkIIEyGEiRDCRAhhIoQwEUKYCCFMhBAmQggTIYSJEMJECGEihDARQpgIIUyEECZCCBMhhIkQwkQIYSKEMBFCmAghTIQQJkIIEyGEiRDCRAhhIoQwEUKYCCFMhBAmQggTIYSJEMJECGEihDARQpgIIUyEECZCCBMhhIkQwkQIYSKEMBFCmAghTIQQJkIIEyGEiRDCRAhhIoQwEUKYCCFMhBAmQggTIYT9D54EIz8Qx+bqAAAAAElFTkSuQmCC';
+  const heat_wave_b64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAADICAIAAADdvUsCAAADUElEQVR4nO3csYqUVxiA4W933cJCEIs0QQhCWu3CgpA6TXIPQTDX4KVolcJerLROY0gjQuwFWUgVNmVAWYsUicvi/s36HjLPU80Hh8M0L2dm/uHsnd4fILRfvwHYdSKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYlfqNwCrun+Zmz/696WTEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAgh5o4Z1vO5LndZhJMQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCHmjhn+Y8cud1mEkxBiIoSYCCEmQoiJEGIihJhHFOt5eDqvns77d3NwOHd+mJmPxp/2Ll7z6fGfHViGCNfz5rf5/dn88nDu3ptrX8z+/kfjljWfHlmMCNfz59t59/fcOpqT4zk5npmz45Y1F+7AMnwnXNKvj+e7B/P6+fnjljVbdmANIlzS3R/nxc9z+/vzxy1rtuzAGkS4nhs35/DqvHwyN27O9S/PjlvWbNmBZfhOuJ6vvpm//pivv52Dw7l1NDNnxy1rLtyBZYhwPVseIXjM8D/i4yjERAgxEUJMhBATIcT8OroGl7vsMCchxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJs5++YcbkLNSchxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUKsu2PG5S4wM05CyIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGJ7p5f69zHgIk5CiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYh8Aq3SqM2QObZAAAAAASUVORK5CYII=';
+  const world_bank_b64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAADICAIAAADdvUsCAAADVklEQVR4nO3cvWoUYRSA4dlsVkTxByGVAUUQO0VbwdorMXdh2MvI7dhoIYigKGhhY2NAErGIIQkWwc6VyLK+G/M83Wk+TvMyM8U3oydPvwxAZ6VeAM46EUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBBbrRfg/7Q1XVvc4Rub24s7/N/zJISYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoit1gswr63p2uIO39jcXtzhHPMkhJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYi71Lqmt6drr9z8Oj4bxeHTvzrlhGGaN9abMS4RL6tPngzcf9p+93Hv44Pyli6OV0WjWeNwkp5cIl9TX3cODw+HW+mTn29HOt6NhGGaN9abMyzfh8nrxeu/xowtvP+6fZOT0EuHyenj//PNXe3d/vW3+eeT0EuGSunZlPJmMXr37ce3K+OrllT+M9abMyzfhkrp5fXX3+7nbNybj8ejW+mQYhlljvSnzEuGSOvkPPxf631H+Aa+jEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMfcJ/8JCb+6d/AIh/xlPQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihNhqvcDvbU3XFnf4xub24g6HvzV68vRLvQOcaV5HISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiP0EDsN8Sqk6ibMAAAAASUVORK5CYII=';
+  const sdgs_b64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAADICAIAAADdvUsCAAAEKUlEQVR4nO3cUW4bNxRAUbvokromL6pryp7aDwFFUCeGPJJ4+WbO+cuPzRHeBYe0nfe3jx9vQOePegFwdSKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiIc75+Pv+ol8BARQkyEEBPhbLd3UW+ko4kQYiKEmAghJsLBfj4KOhbOJUKIiRBiIoSYCKf6fAh0LBxKhBATIcRECDERjvS7459j4UQihJgIISZCiIlwnq8Pfo6F44gQYiKEmAghJsJh7jnyORbOIkKIiRBiIoSYCCe5/7DnWDiICCEmQoiJEGIiHOO7xzzHwilECDERQkyEEBPhDMcOeI6FI4gQYiKEmAghJsIBHjnaORbu7/3t40e9hjEM9Le8/2207mIn/AZTdT+f1f1E+D1m6x4+pW/xOnqQV9Nfkt8BdsKDTNtnPpNjRHicmfuZT+MwET7E5N34HB4hwkeZP5/Ag1zMPM0Fr2rk9xR2wqe52kRe7XlfR4TPdJ25vM6TLiDCJ7vCdF7hGVcS4fOde0bP/XQJFzMvdLKrGvm9iJ3whc40tWd6lt2I8LXOMbvneIptifDlpk/w9PXvT4QrzJ3juSsfxMXMUoOuauS3jJ1wqSmTPWWd5yDC1faf7/1XeDIiDOw85Tuv7axE2Nhz1vdc1em5mIltclUjv5CdMLbD9O+whisTYa9tQIE5EUJMhBATYa+9m9nkZujKRAgxEUJMhBATYWyHI9kOa7gyEUJMhBATIcREWNrnMLbPSi5IhBATIcRECDERZnY7hu22nusQ4Xj+IHA6Ec52K1CHo/1ZL4CD/hfe7Z9eKSeyEzYerOV3W9+DW6KGEyKc5+vSvJqOI8Jh7mlMh7OIcJL769LhIP7z38CBo9fhqFZ+L46xEw7wSBWK2p8Id/d4RTrcnAi39qx+dLgzEa52/yHtueXc/9X8tHAxvzGzoxdtXH6rZk92wu28+tXRq+luRLiXNYXocCsiXOrrV8GVbXz9vbyyriTCXazfneyHm3Ax0wtjcFWzAzthbIftaIc1XJkI1/m84ewz/Z9XYntcRoSZfQq82W091yHCxp4Tv+eqTs/FzGqbD7qrmvXshIvcxnrzAv8jxZVEuM6UAm9mrXY0f1kPMTshxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEULsX0iK4wbk3C05AAAAAElFTkSuQmCC';
+  document.addEventListener("DOMContentLoaded", function() {
+    const imgMappings = {
+      'project-sahel.png': sahel_b64,
+      'project-geo-emotion.png': geo_emotion_b64,
+      'project-wildfire.png': wildfire_b64,
+      'project-heat-wave.png': heat_wave_b64,
+      'project-world-bank.png': world_bank_b64,
+      'project-sdgs.png': sdgs_b64
+    };
+    
+    document.querySelectorAll("img[src*='project-']").forEach(img => {
+      if (imgMappings[img.src.split('/').pop()]) {
+        img.src = imgMappings[img.src.split('/').pop()];
+      }
+    });
+  });
+</script>
+</body>
+</html>
