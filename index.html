@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>엄지민 - 공간데이터사이언티스트</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', -apple-system, sans-serif;
+        }
+
+        html {
+            scroll-snap-type: y proximity;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f9fafb;
+            color: #111827;
+            line-height: 1.6;
+        }
+
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            z-index: 50;
+        }
+
+
+        header .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 { font-size: 1.25rem; font-weight: bold; }
+        header p { font-size: 0.75rem; color: #6b7280; }
+
+
+
+        /* Container */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 1.5rem;
+            max-width: 1440px;
+            margin: 0 auto;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            scroll-snap-align: start;
+            scroll-margin-top: 0px;
+            box-sizing: border-box;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero .highlight {
+            color: #4f46e5;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: #374151;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 0.75rem;
+            background: #e0e7ff;
+            color: #4338ca;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            margin-top: -1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links a {
+            font-size: 0.9rem;
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+
+        .hero-flex {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-text { flex: 1 1 420px; min-width: 280px; }
+
+        /* Section */
+        section {
+            padding: 5rem 1.5rem;
+            max-width: 1440px;
+            margin: 0 auto;
+            border-top: 1px solid #e5e7eb;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            scroll-snap-align: start;
+            scroll-margin-top: 73px;
+            box-sizing: border-box;
+        }
+
+        section > h2 { flex-shrink: 0; }
+
+
+        section h2 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin-bottom: 3rem;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+
+        @media (min-width: 768px) {
+            .grid-2 { grid-template-columns: repeat(2, 1fr); }
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+        }
+
+
+        .card-image {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #e0e7ff, #dbeafe);
+            object-fit: cover;
+        }
+
+
+        .card-body {
+            padding: 1.25rem;
+        }
+
+        .card-tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: #dbeafe;
+            color: #1e40af;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin: 0.75rem 0;
+        }
+
+        .card-desc {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+
+        .card-link {
+            font-size: 0.875rem;
+            color: #4f46e5;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show { display: flex; }
+
+        .modal-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            max-width: 640px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+
+        .modal-box img {
+            width: 100%;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            display: block;
+        }
+
+        .modal-box .modal-meta {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-bottom: 0.25rem;
+        }
+
+
+        .modal-box .modal-award {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.375rem;
+            margin-bottom: 0.75rem;
+        }
+
+
+        .modal-box h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .modal-box h3 {
+            font-weight: 600;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-box p, .modal-box li {
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-box ul {
+            margin-left: 1.25rem;
+            list-style: disc;
+        }
+
+        .modal-box .stat-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.75rem 0;
+        }
+
+        .modal-box .stat-pill {
+            background: #eef2ff;
+            color: #4338ca;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.35rem 0.7rem;
+            border-radius: 0.4rem;
+        }
+
+
+        .modal-box .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .modal-box .tag-chip {
+            font-size: 0.75rem;
+            background: #f3f4f6;
+            color: #374151;
+            padding: 0.25rem 0.55rem;
+            border-radius: 0.35rem;
+        }
+
+
+        .modal-box .site-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #4f46e5;
+            text-decoration: none;
+            margin: 0.5rem 0 0.75rem;
+        }
+
+        .modal-box .site-link:hover { text-decoration: underline; }
+
+        /* Two Column */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .two-col { grid-template-columns: 1fr 1fr; }
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-item p:first-child {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-item p:last-child {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+
+        .award-box {
+            padding: 1rem;
+            background: #eef2ff;
+            border-left: 4px solid #4f46e5;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+
+        .award-box p:first-child {
+            font-weight: 600;
+        }
+
+        .award-box p:last-child {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+
+
+        /* Activity timeline (new, same visual language as award-box) */
+        .activity-group h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 1.75rem 0 0.75rem;
+            color: #4f46e5;
+        }
+
+
+        .activity-group h3:first-child { margin-top: 0; }
+
+        .activity-row {
+            display: grid;
+            grid-template-columns: 130px 1fr;
+            gap: 1rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+
+        .activity-row:last-child { border-bottom: none; }
+
+        .activity-period {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+
+        .activity-row strong {
+            display: block;
+            font-size: 0.875rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .activity-row span {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+
+        @media (max-width: 640px) {
+            .activity-row { grid-template-columns: 1fr; gap: 0.15rem; }
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #e5e7eb;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div>
+                <h1>엄지민</h1>
+                <p>공간데이터사이언티스트</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="hero-flex">
+            <div class="hero-text">
+                <h2>공간데이터사이언티스트를<br>꿈꾸는 <span class="highlight">엄지민</span>입니다</h2>
+                <div class="contact-links">
+                    <a href="mailto:jiminum0921@ewha.ac.kr"><i class="fas fa-envelope"></i> jiminum0921@ewha.ac.kr</a>
+                    <span><i class="fas fa-graduation-cap"></i> 이화여자대학교 지리교육전공 · 컴퓨터공학 부전공 · 공간정보융합트랙 이수중</span>
+                </div>
+                <div class="badges">
+                    <span class="badge">GeoAI</span>
+                    <span class="badge">ArcGIS</span>
+                    <span class="badge">QGIS</span>
+                    <span class="badge">Python</span>
+                    <span class="badge">머신러닝</span>
+                    <span class="badge">딥러닝</span>
+                    <span class="badge">공간분석</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects -->
+    <section>
+        <h2>프로젝트</h2>
+        <div class="grid grid-3">
+
+            <!-- Project 1: Sahel -->
+            <div class="card" onclick="openProject('sahel')">
+                <img src="project-sahel.jpg" class="card-image" style="object-fit: cover; display: block;" alt="사헬 지대 위성영상 도로망 추출">
+                <div class="card-body">
+                    <span class="card-tag">Vision AI · GIS</span>
+                    <h3 class="card-title">아프리카 사헬 지대 비포장도로 추출</h3>
+                    <p class="card-desc">위성영상 딥러닝 기반 도로 자동 추출 · 최우수상</p>
+                    <p class="card-link">→ 클릭해서 보기</p>
+                </div>
+            </div>
+
+            <!-- Project 2: Geosensibility Contour -->
+            <div class="card" onclick="openProject('geo-emotion')">
+                <img src="project-geo-emotion.jpg" class="card-image" style="object-fit: cover; object-position: top; display: block;" alt="감성의 등고선 프로젝트 페이지">
+                <div class="card-body">
+                    <span class="card-tag" style="background: #fce7f3; color: #be185d;">시각화</span>
+                    <h3 class="card-title">감성의 등고선</h3>
+                    <p class="card-desc">서울 동네 브랜드화의 공간 역학 · 우수상</p>
+                    <p class="card-link">→ 클릭해서 보기</p>
+                </div>
+            </div>
+
+            <!-- Project 3: Wildfire -->
+            <div class="card" onclick="openProject('wildfire')">
+                <img src="project-wildfire.jpg" class="card-image" style="object-fit: cover; object-position: top; display: block;" alt="강원도 배전선로 화재 위험 노출 분석 플랫폼">
+                <div class="card-body">
+                    <span class="card-tag">머신러닝</span>
+                    <h3 class="card-title">전력 인프라 산불 위험도 분석</h3>
+                    <p class="card-desc">기상청 기상 빅데이터 콘테스트</p>
+                    <p class="card-link">→ 클릭해서 보기</p>
+                </div>
+            </div>
+
+            <!-- Project 4: Heat Wave -->
+            <div class="card" onclick="openProject('heat-wave')">
+                <img src="project-heat-wave.jpg" class="card-image" style="object-fit: cover; display: block;" alt="분당·판교 예측 PET 체감온도 지도">
+                <div class="card-body">
+                    <span class="card-tag" style="background: #fee2e2; color: #b91c1c;">공간머신러닝</span>
+                    <h3 class="card-title">폭염 스마트시티 (LH COMPAS)</h3>
+                    <p class="card-desc">보행 열스트레스 분석 & GWRF 공간회귀 모델링</p>
+                    <p class="card-link">→ 클릭해서 보기</p>
+                </div>
+            </div>
+
+            <!-- Project 5: World Bank -->
+            <div class="card" onclick="openProject('world-bank')">
+                <div class="card-image"><i class="fas fa-earth-americas"></i></div>
+                <div class="card-body">
+                    <span class="card-tag">머신러닝</span>
+                    <h3 class="card-title">월드뱅크 빈곤율 예측</h3>
+                    <p class="card-desc">LightGBM 모델 · 성능 상위 15%</p>
+                    <p class="card-link">→ 클릭해서 보기</p>
+                </div>
+            </div>
+
+            <!-- Project 6: SDGs -->
+            <div class="card" onclick="openProject('sdgs')">
+                <img src="project-sdgs.jpg" class="card-image" style="object-fit: cover; object-position: top; display: block;" alt="낙동강 생태 통합 대시보드">
+                <div class="card-body">
+                    <span class="card-tag" style="background: #d1fae5; color: #059669;">데이터 대시보드</span>
+                    <h3 class="card-title">낙동강 생태 대시보드</h3>
+                    <p class="card-desc">낙동강 생태 데이터 통합 · UN 청년 특별보고관</p>
+                    <p class="card-link">→ 클릭해서 보기</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Skills & Awards -->
+    <section>
+        <div class="two-col">
+            <div>
+                <h2>🔧 기술 스택</h2>
+                <div class="skill-item">
+                    <p>공간데이터 분석</p>
+                    <p>ArcGIS Pro, ArcGIS Wayback Imagery, QGIS(UMEP/SOLWEIG), H3 헥사곤 인덱싱, 공간통계(Moran's I, LISA)</p>
+                </div>
+                <div class="skill-item">
+                    <p>위성영상 처리</p>
+                    <p>위성 이미지 처리 및 공간 매핑, Google Earth Engine, Sentinel-2/Landsat, DSM/DEM 전처리</p>
+                </div>
+                <div class="skill-item">
+                    <p>머신러닝</p>
+                    <p>Python 기반 머신러닝 모델 개발 — LightGBM, XGBoost, CatBoost, GWR/GWRF, SHAP</p>
+                </div>
+                <div class="skill-item">
+                    <p>딥러닝</p>
+                    <p>U-Net, ResNet 등 CNN 모델 전이학습 및 세그멘테이션</p>
+                </div>
+                <div class="skill-item">
+                    <p>데이터 & 사무</p>
+                    <p>Python, SQL, Claude API, Excel</p>
+                </div>
+            </div>
+
+            <div>
+                <h2>🏆 수상 경력</h2>
+                <div class="award-box">
+                    <p>공간 빅데이터 분석 및 시각화 경진대회</p>
+                    <p>최우수상 · 2025.12.17 · 이화여자대학교</p>
+                </div>
+                <div class="award-box">
+                    <p>AI 활용 지리학 콘텐츠 공모전</p>
+                    <p>우수상 · 2026.6.19 · 대한지리학회</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities & Leadership (new) -->
+    <section>
+        <h2>🧭 대외활동 & 리더십</h2>
+        <div class="two-col">
+            <div class="activity-group">
+                <h3>리더십 & 조직 운영</h3>
+                <div class="activity-row"><span class="activity-period">2–4학년 · 3년</span><div><strong>이리온 (집행국장)</strong><span>유기동물 봉사동아리. 100여 명 규모 동아리 운영, 멤버 모집 면접, 동물권 프로젝트 및 MT 기획 총괄</span></div></div>
+                <div class="activity-row"><span class="activity-period">3–4학년 · 1년</span><div><strong>EURON (운영진)</strong><span>인공지능 학술 동아리. DL 세션 운영진으로 매주 스터디·발표 리드, 면접·출석 관리</span></div></div>
+                <div class="activity-row"><span class="activity-period">1–2학년 · 1.5년</span><div><strong>참우리 (운영진)</strong><span>시각장애인 교육봉사 동아리. 학교 측과 직접 연락하는 매칭 역할 총괄</span></div></div>
+                <div class="activity-row"><span class="activity-period">4학년 1학기 · 6개월</span><div><strong>UNSA</strong><span>유엔청년연합. SDGs 프로젝트 개발 및 학술대회 진행 — '낙동강 생태 대시보드' 프로젝트로 연결</span></div></div>
+
+                <h3>위기 대응 & 문제 해결력</h3>
+                <div class="activity-row"><span class="activity-period">3–4학년 · 1년</span><div><strong>ADH Academy</strong><span>주한미국대사관 청년 프로그램. 연사 섭외가 무산돼 행사가 무산될 위기에서, 설문 기반 청년토론으로 방향을 바꾸고 전남대 UNSA와 연계해 기한 내 성사시킴</span></div></div>
+            </div>
+            <div class="activity-group">
+                <h3>글로벌 협업 & 커뮤니케이션</h3>
+                <div class="activity-row"><span class="activity-period">3학년 1학기 · 6개월</span><div><strong>Verse One</strong><span>Rutgers University 교환학생 중 참여한 힙합댄스 크루. 주 2회 연습, 약 3회 무대 공연으로 다문화 협업 경험</span></div></div>
+                <div class="activity-row"><span class="activity-period">4학년 1학기 · 6개월</span><div><strong>EKLESS</strong><span>교환학생 교류 동아리. 1:1 매칭으로 외국인 교환학생의 한국 문화·학교 생활 적응 지원</span></div></div>
+
+                <h3>실무 전문성</h3>
+                <div class="activity-row"><span class="activity-period">4학년</span><div><strong>이화여대 공간정보연구실</strong><span>연구 보조 — 딥러닝 모델 개발용 데이터 라벨링(500여 개 객체)</span></div></div>
+                <div class="activity-row"><span class="activity-period">2025.6–2026.8 · 8개월</span><div><strong>㈜메가스터디</strong><span>검수원 — 사회탐구팀 모의고사 한국지리·세계지리 문항 검수</span></div></div>
+
+                <h3>사회적 책임감</h3>
+                <div class="activity-row"><span class="activity-period">누적 4년+</span><div><strong>봉사활동</strong><span>유기동물 봉사 2.5년, 시각장애인 교육봉사 1년, 이대부속 어린이집 28시간, 국경없는의사회 매파톤(사헬 프로젝트의 출발점)</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Languages -->
+    <section>
+        <div class="two-col">
+            <div>
+                <h2>🎓 학력</h2>
+                <div class="skill-item">
+                    <p>이화여자대학교</p>
+                    <p>지리교육전공(사회과교육과) · 컴퓨터공학 부전공(소프트웨어학부) · 2023.03–2028.02(예정) · 휴학 중</p>
+                </div>
+                <div class="skill-item">
+                    <p>Rutgers University (교환학생)</p>
+                    <p>2025.01 – 2025.06</p>
+                </div>
+                <div class="skill-item">
+                    <p>이대부속고등학교</p>
+                    <p>2020.03 – 2023.02 졸업</p>
+                </div>
+            </div>
+            <div>
+                <h2>🗣️ 어학 · 자격</h2>
+                <div class="skill-item">
+                    <p>TOEIC 935 / TOEIC Speaking Lv.7(AM 180)</p>
+                    <p>2026.02 취득</p>
+                </div>
+                <div class="skill-item">
+                    <p>TOEFL iBT 4.5</p>
+                    <p>2026.03 취득</p>
+                </div>
+                <div class="skill-item">
+                    <p>정보처리기사 필기</p>
+                    <p>2026.02 합격</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 엄지민. 공간데이터사이언티스트 포트폴리오.</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="modal" onclick="if(event.target===this) closeModal()">
+        <div class="modal-box">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+<script>
+  const projects = {
+    'sahel': {
+      tag: 'Vision AI · GIS',
+      title: '사헬 지대 비포장도로망 딥러닝 추출',
+      meta: 'Sokoto, Nigeria · 2025.12.02–12.17 · Team Project',
+      award: '🏆 최우수상 · 2025 공간 빅데이터 분석 및 시각화 경진대회 (이화여자대학교)',
+      image: 'project-sahel.jpg',
+      stats: ['mIoU 0.9167 (91.7%)', '60cm 해상도', '3m 버퍼→6m 폭'],
+      role: '위성영상 취득·전처리, 도로 중심선 전수 라벨링, 전이학습 모델링까지 파이프라인 전 과정 주도',
+      problem: '상용 지도엔 없는 비포장도로 때문에 사헬 지대 홍수 구호물자 전달이 늦어집니다. 2024년 차드·니제르·나이지리아에 기록적 홍수가 났지만, Google Maps·OSM은 비포장도로를 누락하거나 계절마다 바뀌는 실제 경로를 반영하지 못해 "라스트 마일" 지연이 반복됩니다.',
+      approach: [
+        '상용 지도에 없는 최신 실제 지형을 반영하기 위해 ArcGIS Wayback Imagery 60cm 영상을 확보했습니다.',
+        '학습 데이터 자체가 없는 상황을 해결하고 실제 차량 통행폭을 반영하기 위해, 도로 중심선을 전수 라벨링하고 3m 버퍼(총 폭 6m)와 Dissolve를 적용했습니다.',
+        "라벨 데이터가 적은 상황에서 과적합을 방지하기 위해, Esri 'Road Extraction – North America' 사전학습 모델(ResNet 백본 U-Net)로 전이학습(Epoch 20, Batch 8)을 진행했습니다.",
+        '도로의 유무가 아니라 "끊겼는지"를 파악하기 위해, Raster Calculator로 홍수 전·후 도로 레이어를 비교했습니다.'
+      ],
+      result: 'mIoU 0.9167(91.7%)로 도로망을 복원해 최우수상을 수상했습니다. 홍수 전후 비교로 유실·단절 구간을 자동 식별하는 재난대응 프레임워크의 가능성을 보여줬습니다.',
+      images2: ['project-sahel-detail1.jpg', 'project-sahel-detail2.jpg'],
+      stack: ['ArcGIS Pro', 'ArcGIS Wayback Imagery', 'Deep Learning Toolkit (U-Net/ResNet)', 'Transfer Learning', 'Raster Calculator']
+    },
+    'geo-emotion': {
+      tag: '시각화 · 공간통계',
+      title: '감성의 등고선',
+      meta: '서울 성수·을지로·이태원·홍대 · 2026 대한지리학회 AI 활용 지리학 콘텐츠 공모전 · Team',
+      award: '🏅 우수상 · 트랙1 대중콘텐츠',
+      link: 'https://jiminum0921-droid.github.io/geo_comp/',
+      image: 'project-geo-emotion.jpg',
+      stats: ['블로그 732개 분석', "Moran's I 0.2335 (p=0.050)", '이태원 100점 · 을지로 66.7 · 성수 56 · 홍대 22.7'],
+      role: '블로그 텍스트 감성 추출·H3 공간 집계·LISA 공간통계 분석 및 웹페이지 제작 전체 설계',
+      problem: '공간통계·지리학 분석은 일반 대중에게 어렵고 낯설게 느껴집니다. "동네가 힙하다"는 익숙한 감성 언어로 딱딱한 공간분석을 풀어내, 더 친밀하게 다가갈 수 있는 대중 콘텐츠를 개발하고자 했습니다.',
+      approach: [
+        '설문보다 빠르게 대규모 실제 언어 데이터에서 감성을 뽑아내기 위해, 블로그 732개를 Claude API로 분석해 감성·장소 키워드를 추출했습니다.',
+        '행정동 단위보다 촘촘한 골목 단위 감성 차이를 잡아내기 위해, 카카오 로컬 API로 지오코딩한 뒤 H3 resolution 9 격자(약 0.1km²)에 집계했습니다.',
+        "감성 점수의 높고 낮음이 아니라 이웃과 함께 확산되는 중인지를 구분하기 위해, Global Moran's I로 공간 군집을 확인한 뒤 LISA로 HH·LH·LL·HL 4분면을 분류했습니다."
+      ],
+      result: "Global Moran's I 0.2335(p=0.050)로 감성의 공간 군집을 통계적으로 확인했고, 이태원(100점)·을지로(66.7)·성수(56)·홍대(22.7) 순의 감성 위계를 실증했습니다.",
+      stack: ['Claude API', 'H3', 'libpysal / esda (LISA)', '카카오 로컬 API', 'geopandas', 'GitHub Pages']
+    },
+    'wildfire': {
+      tag: '머신러닝 · Tabular ML',
+      title: '강원 전력 기반시설 산불 위험 노출도 평가',
+      meta: '강원도 · 기상청 기상 빅데이터 콘테스트 · Team',
+      award: '',
+      link: 'https://jiminum0921-droid.github.io/Gangwon_fire_risk_platform/',
+      image: 'project-wildfire.jpg',
+      stats: ['H3 셀 4,822개', '고위험(4~5등급) 셀 1,261개', '2월 704건(연중 최다)'],
+      role: '산불 데이터 분석, 도로 변수 방법론 설계, 산림 인벤토리 전처리·문서화 담당 (팀원: 인프라 선 변수 집계, 보고서 검수)',
+      problem: '기존 행정 단위 통계로는 산불로 인한 KEPCO 전력 철주 손상 위험을 개별 인프라 단위까지 잡아내지 못합니다.',
+      approach: [
+        '행정구역 경계에 얽매이지 않고 전국을 같은 단위로 비교하기 위해, H3 r7 헥사곤(전국 표준 격자, 4,822셀)을 채택했습니다.',
+        '원본 데이터 형식 차이로 인한 오차를 방지하기 위해, 임상도 2013(래스터)/2019(벡터)를 각각 Zonal Statistics·Vector Intersection으로 전처리했습니다.',
+        '범주형(임상 등급)과 연속형(거리) 변수가 섞인 상황에서도 강건한 예측을 하기 위해, CatBoost/XGBoost 하이브리드 모델을 채택했습니다.',
+        '소수 극단값이 지도 전체 색상을 왜곡하는 것을 방지하기 위해, 순위 기반 0~100 정규화를 적용했습니다.'
+      ],
+      result: '4,822개 H3 셀 중 1,261개(26%)가 고위험(4~5등급)으로 식별돼 KEPCO·지자체가 우선 점검할 구간을 좁혔습니다.',
+      stack: ['H3 (Uber)', 'CatBoost', 'XGBoost', 'QGIS · Zonal Statistics', 'GDAL']
+    },
+    'heat-wave': {
+      tag: '공간머신러닝',
+      title: '폭염 스마트시티 (LH COMPAS)',
+      meta: '판교·분당 → 왕숙1·창릉 · LH COMPAS 공모전(SBJ_2606_002) · Team',
+      award: '🏆 LH·국토교통부 COMPAS 도시균형발전 공간분석 경진대회 출전',
+      image: 'project-heat-wave.jpg',
+      stats: ['PET 35~50℃', '극한 열스트레스 75.5%', 'GWRF SVF 의존도 98.9%'],
+      role: 'SOLWEIG 열환경 모델링, GWR·RF·GWRF·XGBoost 모델 비교, 더위회피 경로 분석 파이프라인 설계',
+      problem: '실측 데이터 없이 시설만 늘리는 기존 폭염 대응으로는 "어디가 왜 위험한지" 설명할 수 없습니다. 게다가 3기 신도시(왕숙1·창릉)는 아직 조성 전이라 실측 데이터 자체가 없습니다.',
+      approach: [
+        '지표온도(LST)만으로는 반영하지 못하는 보행자의 실제 열스트레스를 정확히 산출하기 위해, SOLWEIG(UMEP)로 MRT·PET를 계산했습니다.',
+        '성능과 설명력을 동시에 만족하는 모델을 찾기 위해, 284,039개 격자에 GWR·RF·GWRF·XGBoost 4개 모델을 동일 조건(공간블록 교차검증)으로 비교했습니다.',
+        '정확도뿐 아니라 "왜 이 자리가 위험한가"까지 설명하기 위해, 격자별 SHAP 국지 해석이 가능한 GWRF를 최종 채택했습니다.',
+        '실측 데이터가 없는 신도시에도 결과를 적용하기 위해, 계획형태가 닮은 판교·분당 지점의 값을 갖다 쓰는 유사사례 전이 방식으로 왕숙1·창릉까지 확장했습니다.'
+      ],
+      result: 'PET 35~50℃, 격자의 75.5%가 극한 열스트레스 구간으로 확인됐고, GWRF는 격자의 98.9%에서 SVF(하늘 트임)를 1순위 위험요인으로 지목해 "그늘 부족"이라는 구체적 정책 근거를 제시했습니다.',
+      stack: ['QGIS/UMEP · SOLWEIG', 'GWR / GWRF', 'XGBoost · SHAP', 'scikit-learn', 'NetworkX', 'GDAL']
+    },
+    'world-bank': {
+      tag: '머신러닝 · Tabular ML',
+      title: '월드뱅크 DrivenData 빈곤율 예측 챌린지',
+      meta: 'EURON 학회 팀 프로젝트 · 3학년 · Global Challenge',
+      award: '🥈 성능 상위 15%',
+      image: '',
+      stats: ['Top 15%', 'LightGBM 최종 채택'],
+      role: 'LightGBM 모델링 및 결측치 처리·피처 엔지니어링 담당',
+      problem: '세계은행 가구 설문조사 데이터는 응답 항목별 결측치가 심각해, 일반적인 전처리로는 정보 손실이 컸습니다.',
+      approach: [
+        '결측이 담고 있는 "왜 응답하지 않았는지"라는 정보를 지우지 않기 위해, 단순 평균 대치 대신 결측 여부 자체를 신호로 남기는 방식으로 정제했습니다.',
+        '응답의 순서 정보를 살려 예측력을 높이기 위해, 범주형·순서형 설문 응답에 특화된 피처 엔지니어링을 수행했습니다.',
+        '대용량 범주형 특성과 결측치를 안정적으로 처리하기 위해, LightGBM 기반 모델을 채택했습니다.'
+      ],
+      result: '전체 참가팀 중 상위 15% 성능을 달성했습니다.',
+      stack: ['LightGBM', 'pandas', 'scikit-learn', 'Feature Engineering']
+    },
+    'sdgs': {
+      tag: '데이터 대시보드 · 정책',
+      title: '낙동강 생태 대시보드',
+      meta: '낙동강 유역 · 4학년 1학기 · Global SDGs Youth Camp · Team',
+      award: '🌏 SDGs 15(육상생태) 시의회 정책 건의',
+      link: 'https://jiminum0921-droid.github.io/SDGs_camp_team7/',
+      image: 'project-sdgs.jpg',
+      stats: ['7개 기관 · 12개 시스템 통합', '2003년~ 누적 철새 데이터', '생태건강성 C등급(부산권 평균)'],
+      role: 'UN 청년 특별보고관으로 SDGs 목표 15(육상생태) 조사·평가 및 시각화 프로토타입 제작 총괄',
+      problem: '낙동강 생태 데이터가 국립환경과학원·환경부·통계청·부산광역시 등 최소 7개 기관, 12개 시스템에 흩어져 있어 정책 담당자도 종합적인 판단이 어려웠습니다.',
+      approach: [
+        '담당자가 여러 사이트를 오가지 않고 한눈에 비교할 수 있도록, 생태 건강성(A~E등급)·녹조 경보 단계·수질(BOD)·철새 관측 데이터를 하나의 화면으로 통합했습니다.',
+        '지역별·시간별 비교가 가능한 정책 판단 자료를 만들기 위해, 지역 선택 위젯과 시간 추이 그래프를 설계했습니다.'
+      ],
+      result: '완성한 프로토타입을 실제 시의회에 제출·건의해 정책 의사결정 자료로 연결했습니다.',
+      stack: ['공공데이터 API 통합', '데이터 시각화', 'GitHub Pages']
+    }
+  };
+
+  function openProject(id) {
+    const p = projects[id];
+    if (!p) return;
+    const el = document.getElementById('modal-content');
+    let html = '';
+    if (p.award) html += `<div class="modal-award">${p.award}</div>`;
+    html += `<h2>${p.title}</h2><p class="modal-meta">${p.meta}</p>`;
+    if (p.link) html += `<a class="site-link" href="${p.link}" target="_blank" rel="noopener">🔗 라이브 사이트 바로가기 →</a>`;
+    if (p.image) html += `<img src="${p.image}" alt="${p.title}">`;
+    if (p.stats && p.stats.length) {
+      html += '<div class="stat-row">' + p.stats.map(s => `<span class="stat-pill">${s}</span>`).join('') + '</div>';
+    }
+    if (p.role) html += `<h3>My Role</h3><p>${p.role}</p>`;
+    html += `<h3>Problem</h3><p>${p.problem}</p>`;
+    html += '<h3>Approach</h3><ul>' + p.approach.map(a => `<li>${a}</li>`).join('') + '</ul>';
+    if (p.result) html += `<h3>Result</h3><p>${p.result}</p>`;
+    if (p.images2) {
+      html += p.images2.map(src => `<img src="${src}" alt="${p.title} 상세 이미지">`).join('');
+    }
+    html += '<h3>Tech Stack</h3><div class="tag-row">' + p.stack.map(t => `<span class="tag-chip">${t}</span>`).join('') + '</div>';
+    el.innerHTML = html;
+    document.getElementById('modal').classList.add('show');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('show');
+  }
+
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
