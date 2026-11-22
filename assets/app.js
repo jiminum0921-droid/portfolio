@@ -54,6 +54,8 @@
     });
   }
 
+  const fig = (src, alt, cap, lazy) => `<figure class="m-fig"><img src="${src}" alt="${esc(alt)}"${lazy ? ' loading="lazy"' : ''}>${cap ? `<figcaption>${esc(cap)}</figcaption>` : ''}</figure>`;
+  const figs2 = (o, alt) => o.image2.map((src, i) => fig(src, alt, (o.caption2 || [])[i], true)).join('');
   const md = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
   const ul = (items) => `<ul>${items.map((x) => `<li>${md(x)}</li>`).join('')}</ul>`;
 
@@ -63,14 +65,14 @@
     if (d.award) h += `<div class="m-award">${esc(d.award)}</div>`;
     h += `<h2>${esc(d.title)}</h2><p class="m-meta">${esc(d.meta)}</p>`;
     h += linksHTML({ links: d.links }, 'm-links');
-    if (d.image) h += `<img src="${d.image}" alt="${esc(d.title)}">`;
+    if (d.image) h += fig(d.image, d.title, d.caption);
     d.sections.forEach((s) => {
       h += `<h3>${esc(s.h)}</h3>`;
       if (s.kpis) h += `<div class="kpis m-kpis">${s.kpis.map((k) => `<div class="kpi"><b>${esc(k.n)}</b><span>${esc(k.l)}</span></div>`).join('')}</div>`;
       if (s.items) h += ul(s.items);
       if (s.steps) h += s.steps.map((st) => `<div class="m-step"><h4>${esc(st.t)}</h4>${ul(st.items)}</div>`).join('');
     });
-    if (d.image2) h += d.image2.map((src) => `<img src="${src}" alt="${esc(d.title)} 상세" loading="lazy">`).join('');
+    if (d.image2) h += figs2(d, `${d.title} 상세`);
     if (d.stack && d.stack.length) h += `<h3>Tools</h3><div class="m-chips">${d.stack.map((t) => `<span>${esc(t)}</span>`).join('')}</div>`;
     return h;
   }
@@ -85,7 +87,7 @@
     h += `<h2>${esc(p.title)}</h2><p class="m-meta">${esc(p.meta)}</p>`;
     h += linksHTML(p, 'm-links');
     if (p.note) h += `<p class="m-anon"><i class="fa-solid fa-user-shield" aria-hidden="true"></i>${esc(p.note)}</p>`;
-    if (p.image) h += `<img src="${p.image}" alt="${esc(p.title)}">`;
+    if (p.image) h += fig(p.image, p.title, p.caption);
     if (p.stats) h += `<div class="m-stats">${p.stats.map((s) => `<span>${esc(s)}</span>`).join('')}</div>`;
     if (company && p.fit && p.fit[company]) h += `<div class="callout m-fit"><b>이 회사와 맞닿은 점</b><br>${esc(p.fit[company])}</div>`;
     h += `<h3>My Role</h3><p>${esc(p.role)}</p>`;
@@ -112,7 +114,7 @@
     if (p.learned && p.learned.length) {
       h += `<div class="m-box learn"><h4>배운 점</h4>${p.learned.map((l) => `<p>${esc(l)}</p>`).join('')}</div>`;
     }
-    if (p.image2) h += p.image2.map((src) => `<img src="${src}" alt="${esc(p.title)} 상세" loading="lazy">`).join('');
+    if (p.image2) h += figs2(p, `${p.title} 상세`);
     if (p.stack && p.stack.length) h += `<h3>Tools</h3><div class="m-chips">${p.stack.map((t) => `<span>${esc(t)}</span>`).join('')}</div>`;
 
     showModal(h);

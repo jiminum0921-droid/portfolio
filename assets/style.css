@@ -371,3 +371,11 @@ td:first-child { font-weight: 700; white-space: nowrap; color: var(--accent-ink)
 @media (max-width: 640px) { .modal-box { padding: 28px 20px; } }
 
 .pcard .ax-more { margin-top: 0; }
+
+/* ── 2026-11-22g: 사진 캡션 ── */
+.m-fig { margin: 16px 0; }
+.modal-box .m-fig img { margin: 0; width: 100%; height: auto; }
+.m-fig figcaption { margin-top: 6px; font-size: .78rem; line-height: 1.5; color: var(--muted); text-align: center; word-break: keep-all; }
+
+/* 2026-11-22h: KPI 4개면 2x2 */
+@media (min-width: 641px) { .m-kpis:has(> .kpi:nth-child(4)) { grid-template-columns: repeat(2, 1fr); } }
