@@ -69,8 +69,9 @@
     d.sections.forEach((s) => {
       h += `<h3>${esc(s.h)}</h3>`;
       if (s.kpis) h += `<div class="kpis m-kpis">${s.kpis.map((k) => `<div class="kpi"><b>${esc(k.n)}</b><span>${esc(k.l)}</span></div>`).join('')}</div>`;
+      if (s.chart) h += s.chart;
       if (s.items) h += ul(s.items);
-      if (s.steps) h += s.steps.map((st) => `<div class="m-step"><h4>${esc(st.t)}</h4>${ul(st.items)}</div>`).join('');
+      if (s.steps) h += s.steps.map((st) => `<div class="m-step"><h4>${esc(st.t)}</h4>${ul(st.items)}${st.chart || ''}</div>`).join('');
     });
     if (d.image2) h += figs2(d, `${d.title} 상세`);
     if (d.stack && d.stack.length) h += `<h3>Tools</h3><div class="m-chips">${d.stack.map((t) => `<span>${esc(t)}</span>`).join('')}</div>`;
