@@ -14,7 +14,7 @@
   --ok-soft: #d1fae5;
   --ok-ink: #047857;
   --radius: 12px;
-  --max: 1120px;
+  --max: 1240px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -333,6 +333,9 @@ td:first-child { font-weight: 700; white-space: nowrap; color: var(--accent-ink)
 .pipe i { font-style: normal; color: var(--muted); font-size: .8rem; }
 .blk-note { font-size: .85rem; color: var(--muted); margin-bottom: 12px; }
 .ax-grid, .pcard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 14px; }
+/* 프로젝트 4개 → 2x2 */
+.pcard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 720px) { .pcard-grid { grid-template-columns: 1fr; } }
 .ax-card, .pcard { text-align: left; font: inherit; color: inherit; cursor: pointer; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: flex; flex-direction: column; gap: 8px; transition: border-color .15s, box-shadow .15s, transform .15s; }
 .ax-card:hover, .pcard:hover, .ax-card:focus-visible, .pcard:focus-visible { border-color: var(--accent); box-shadow: 0 6px 20px rgba(17,24,39,.08); transform: translateY(-2px); outline: none; }
 .ax-no, .pc-no { font-size: .75rem; font-weight: 800; color: var(--accent); letter-spacing: .03em; }
