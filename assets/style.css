@@ -382,3 +382,10 @@ td:first-child { font-weight: 700; white-space: nowrap; color: var(--accent-ink)
 
 /* 2026-11-22h: KPI 4개면 2x2 */
 @media (min-width: 641px) { .m-kpis:has(> .kpi:nth-child(4)) { grid-template-columns: repeat(2, 1fr); } }
+
+/* 섹션마다 한 화면을 꽉 채움 (데스크톱) */
+@media (min-width: 900px) and (min-height: 600px) {
+  .hero, .section { min-height: calc(100svh - 60px); display: flex; flex-direction: column; justify-content: center; }
+  .hero > .wrap, .section > .wrap { width: 100%; }
+  html { scroll-padding-top: 60px; }
+}
